@@ -1,0 +1,25 @@
+{
+  "name": "mcp-daily-change-log",
+  "version": "1.0.0",
+  "description": "A Modular Command Plugin to log daily task notes for change tracking and PR preparation.",
+  "main": "enhanced-mcp-server.js",
+  "type": "module",
+  "scripts": {
+    "mcp-server": "node enhanced-mcp-server.js",
+    "add": "node direct-add.js"
+  },
+  "keywords": [
+    "mcp",
+    "change-log",
+    "smithery",
+    "windsurf"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.15.0",
+    "chalk": "^5.3.0",
+    "chokidar": "^3.5.3",
+    "fs-extra": "^11.2.0"
+  }
+}
