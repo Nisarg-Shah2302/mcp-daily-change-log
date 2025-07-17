@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Post-deploy hook to automatically track deployments
+# This script should be called from your deployment process
+
+# Usage: ./post-deploy.sh <version> <environment> [previous_version]
+
+# Check if required arguments are provided
+if [ "$#" -lt 2 ]; then
+  echo "Usage: $0 <version> <environment> [previous_version]"
+  exit 1
+fi
+
+VERSION="$1"
+ENVIRONMENT="$2"
+PREV_VERSION="${3:-}"
+
+# Get the repository root directory
+REPO_ROOT=$(git rev-parse --show-toplevel)
+
+# Change to the repository root
+cd "$REPO_ROOT" || exit 1
+
+# Run the deployment tracking script
+node track-deployment.js "$VERSION" "$ENVIRONMENT" "$PREV_VERSION" "." "Automatic deployment from CI/CD"
+
+# Exit with success
+exit 0

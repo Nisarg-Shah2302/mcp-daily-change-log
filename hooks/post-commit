@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Post-commit hook to automatically log git commits to the change log
+# This script runs automatically after a commit is made
+
+# Get the repository root directory
+REPO_ROOT=$(git rev-parse --show-toplevel)
+
+# Change to the repository root
+cd "$REPO_ROOT" || exit 1
+
+# Run the git-log script to log today's commits
+node git-log.js "1 day ago" . "Automatic Git Commit Log" "Development" "git,automated,commit"
+
+# Exit with success
+exit 0

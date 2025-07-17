@@ -6,7 +6,17 @@
   "type": "module",
   "scripts": {
     "mcp-server": "node enhanced-mcp-server.js",
-    "add": "node direct-add.js"
+    "add": "node direct-add.js",
+    "log": "node auto-log.js",
+    "log:work": "node auto-log.js \"Work Session\" \"$npm_config_notes\" \"$npm_config_category\" \"$npm_config_tags\"",
+    "log:daily": "node auto-log.js \"Daily Development Summary\" \"$npm_config_notes\" \"Summary\" \"daily-summary,professional,client-ready\"",
+    "git-log": "node git-log.js",
+    "git-log:today": "node git-log.js \"1 day ago\" . \"Today's Git Activity\" \"Development\" \"git,automated,daily\"",
+    "git-log:week": "node git-log.js \"1 week ago\" . \"Weekly Git Activity\" \"Development\" \"git,automated,weekly\"",
+    "deploy": "node track-deployment.js",
+    "deploy:list": "node track-deployment.js list",
+    "install-hooks": "node install-hooks.js",
+    "postinstall": "node install-hooks.js"
   },
   "keywords": [
     "mcp",

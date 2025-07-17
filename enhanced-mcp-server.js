@@ -39,7 +39,6 @@ class EnhancedDailyChangeLogServer {
 
     // Initialize intelligent monitoring system
     this.intelligentMonitor = new IntelligentMonitor();
-    console.log("🚀 ~ EnhancedDailyChangeLogServer ~ constructor ~ intelligentMonitor:", intelligentMonitor)
     
     // Auto-start monitoring
     this.intelligentMonitor.startMonitoring();
@@ -50,11 +49,9 @@ class EnhancedDailyChangeLogServer {
 
   setupErrorHandling() {
     this.server.onerror = (error) => {
-      console.error('[MCP] Server error:', error);
     };
 
     process.on('SIGINT', async () => {
-      console.error('[MCP] Server shutting down...');
       // Stop intelligent monitoring
       this.intelligentMonitor.stopMonitoring();
       process.exit(0);
@@ -64,7 +61,6 @@ class EnhancedDailyChangeLogServer {
   setupToolHandlers() {
     // List available tools
     this.server.setRequestHandler(ListToolsRequestSchema, async () => {
-      console.error('[MCP] Tools requested');
       return {
         tools: [
           {
