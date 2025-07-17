@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Post-merge hook to automatically log git merges to the change log
+# This script runs automatically after a merge or pull is completed
+
+# Get the repository root directory
+REPO_ROOT=$(git rev-parse --show-toplevel)
+
+# Change to the repository root
+cd "$REPO_ROOT" || exit 1
+
+# Run the git-log script to log merged commits
+node git-log.js "1 day ago" . "Automatic Git Merge Log" "Integration" "git,automated,merge"
+
+# Exit with success
+exit 0

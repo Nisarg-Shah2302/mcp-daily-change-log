@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Post-checkout hook to automatically log git checkouts to the change log
+# This script runs automatically after checking out a branch or tag
+
+# Get the repository root directory
+REPO_ROOT=$(git rev-parse --show-toplevel)
+
+# Get the previous and current refs
+PREV_HEAD="$1"
+NEW_HEAD="$2"
+BRANCH_CHECKOUT="$3"
+
+# Only run for branch checkouts, not file checkouts
+if [ "$BRANCH_CHECKOUT" -ne 1 ]; then
+  exit 0
+fi
+
+# Get the branch name
+BRANCH_NAME=$(git symbolic-ref --short HEAD 2>/dev/null || echo "detached HEAD")
+
+# Change to the repository root
+cd "$REPO_ROOT" || exit 1
+
+# Run the git-log script to log the checkout
+node git-log.js "1 hour ago" . "Switched to branch: $BRANCH_NAME" "Development" "git,automated,checkout,branch"
+
+# Exit with success
+exit 0

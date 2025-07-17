@@ -9,6 +9,8 @@ A professional Model Context Protocol (MCP) server for managing daily change log
 - **Zero-Friction Entry**: Direct input processing without confirmation prompts
 - **Multiple Input Methods**: MCP tools, direct-add script, and command-line interface
 - **Report Generation**: Daily summaries and comprehensive reports
+- **Git Integration**: Automatically generate changelog entries from git commits
+- **Deployment Tracking**: Track deployments and generate release notes
 - **Category Management**: Predefined professional categories for organization
 - **Tag Support**: Flexible tagging system for better organization
 - **Clean Architecture**: Optimized codebase with essential files only (recently cleaned up)
@@ -139,6 +141,35 @@ node direct-add.js "Header" "Notes" "Category" "tag1,tag2"
 # Examples:
 node direct-add.js "Bug Fix" "Fixed login issue" "Bug Fixes" "auth,frontend"
 node direct-add.js "Feature Implementation" "Added user dashboard" "Feature Implementation" "ui,backend"
+```
+
+#### Git Integration Commands
+
+```bash
+# Generate changelog from today's git commits
+npm run git-log:today
+
+# Generate changelog from the past week's git commits
+npm run git-log:week
+
+# Custom git log with specific parameters
+npm run git-log -- "3 days ago" "/path/to/repo" "Custom Header" "Category" "tag1,tag2"
+```
+
+#### Deployment Tracking Commands
+
+```bash
+# Track a new deployment
+npm run deploy -- "v1.0.0" "production"
+
+# Track deployment with previous version and custom changes
+npm run deploy -- "v1.0.1" "production" "v1.0.0" "." "Fixed login bug" "Added new dashboard"
+
+# List recent deployments
+npm run deploy:list
+
+# List deployments for specific environment with limit
+npm run deploy:list -- "staging" 5
 node direct-add.js "Daily Summary" "Completed all sprint tasks" "Documentation" "summary,completion"
 ```
 
@@ -372,6 +403,12 @@ node direct-add.js "User Dashboard" "Completed user dashboard with analytics" "F
 # After fixing bugs
 node direct-add.js "Bug Resolution" "Fixed authentication timeout issues" "Bug Fixes" "auth,security"
 
+# Generate changelog from git commits
+npm run git-log:today
+
+# Track a deployment
+npm run deploy -- "v1.0.0" "production" "" "." "Initial release"
+
 # End of day summary
 Use: generate_daily_summary
 ```
@@ -395,7 +432,9 @@ Use: view_recent_entries with days=7
 2. **Descriptive Headers**: Use clear, professional headers
 3. **Proper Categorization**: Use appropriate categories for organization
 4. **Meaningful Tags**: Add relevant tags for better filtering
-5. **Daily Summaries**: Generate end-of-day summaries for reporting
+5. **Git Integration**: Use git-log to automatically track code changes
+6. **Deployment Tracking**: Record all deployments with version information
+7. **Daily Summaries**: Generate end-of-day summaries for reporting
 
 ## 🔒 Security & Privacy
 
@@ -411,6 +450,66 @@ For issues or questions:
 2. Verify your installation follows all steps
 3. Ensure all dependencies are properly installed
 4. Test with direct-add script as alternative
+
+## 🔄 Git Integration
+
+The Git Integration feature automatically generates changelog entries from your git commits.
+
+### Features
+
+- Extract commits from any time range (e.g., "1 day ago", "1 week ago")
+- Group commits by type based on conventional commit format
+- Format commits into professional changelog entries
+- Automatically add entries to your daily change log
+
+### Usage
+
+```bash
+# Generate changelog from git commits in the last day
+npm run git-log:today
+
+# Generate changelog from git commits in the last week
+npm run git-log:week
+
+# Custom git log with specific parameters
+npm run git-log -- "3 days ago" "/path/to/repo" "Custom Header" "Category" "tag1,tag2"
+```
+
+## 🚀 Deployment Tracking
+
+The Deployment Tracking feature helps you track deployments and generate release notes.
+
+### Features
+
+- Track deployments to different environments (production, staging, etc.)
+- Store version information and changes
+- Generate release notes for each version
+- Compare changes between versions
+- List deployment history
+
+### Usage
+
+```bash
+# Track a new deployment
+npm run deploy -- "v1.0.0" "production"
+
+# Track deployment with previous version and custom changes
+npm run deploy -- "v1.0.1" "production" "v1.0.0" "." "Fixed login bug" "Added new dashboard"
+
+# List recent deployments
+npm run deploy:list
+
+# List deployments for specific environment with limit
+npm run deploy:list -- "staging" 5
+```
+
+### Release Notes
+
+Release notes are automatically generated and saved to the `deployments` directory. You can find them at:
+
+```
+deployments/release-notes-{version}.md
+```
 
 ## 🧹 Recent Cleanup (2025-07-15)
 
